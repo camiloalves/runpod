@@ -1,0 +1,10 @@
+runpod
+torch
+torchvision
+diffusers>=0.32.2
+transformers
+accelerate
+sentencepiece
+imageio[ffmpeg]
+pillow
+requests
