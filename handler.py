@@ -1,4 +1,10 @@
 import os
+# FORÇA O CACHE DO HUGGING FACE PARA O DISCO EFÊMERO DO CONTAINER (EVITA ERRO DE DISCO)
+os.environ["HF_HOME"] = "/tmp/huggingface_cache"
+os.environ["TORCH_HOME"] = "/tmp/torch_cache"
+os.makedirs("/tmp/huggingface_cache", exist_ok=True)
+os.makedirs("/tmp/torch_cache", exist_ok=True)
+
 import base64
 import tempfile
 import torch
@@ -14,10 +20,11 @@ pipe = None
 def load_pipeline():
     global pipe
     if pipe is None:
-        print("Carregando Wan2.1-I2V na GPU...")
+        print("Carregando Wan2.1-I2V na GPU com cache em /tmp...")
         pipe = DiffusionPipeline.from_pretrained(
             MODEL_ID,
-            torch_dtype=torch.bfloat16
+            torch_dtype=torch.bfloat16,
+            cache_dir="/tmp/huggingface_cache"
         )
         pipe.enable_model_cpu_offload()
         print("Wan2.1 pronto!")
