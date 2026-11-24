@@ -1,0 +1,11 @@
+runpod==1.7.7
+diffusers>=0.33.1
+transformers>=4.49.0
+accelerate>=1.4.0
+safetensors
+sentencepiece
+protobuf
+ftfy
+imageio[ffmpeg]
+pillow
+hf_transfer
